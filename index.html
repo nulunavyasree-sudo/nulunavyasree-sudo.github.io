@@ -13,869 +13,185 @@
     --card: #131629;
     --border: rgba(255,255,255,0.07);
     --accent: #e8ff47;
-    --accent2: #ff6b35;
-    --blue: #4da6ff;
     --text: #f0f0f8;
     --muted: #6b7280;
-    --premium: linear-gradient(135deg, #f59e0b, #ef4444, #ec4899);
+    --bronze: #cd7f32;
+    --silver: #c0c0c0;
+    --gold: #ffd700;
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* NOISE OVERLAY */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; min-height:100vh; overflow-x:hidden; }
   body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.5;
+    content:''; position:fixed; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events:none; z-index:1000; opacity:0.5;
   }
 
-  /* TOP NAV */
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 40px;
-    border-bottom: 1px solid var(--border);
-    background: rgba(7,8,16,0.9);
-    backdrop-filter: blur(20px);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  .logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 4px;
-    color: var(--accent);
-    text-shadow: 0 0 30px rgba(232,255,71,0.4);
-  }
-
-  .logo span { color: var(--text); }
-
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .nav-badge {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 6px 14px;
-    font-size: 12px;
-    color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .nav-badge.premium-badge {
-    background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(239,68,68,0.15));
-    border-color: rgba(245,158,11,0.4);
-    color: #f59e0b;
-  }
-
-  .nav-btn {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 8px 18px;
-    border-radius: 8px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .nav-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-  .nav-btn.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #000;
-    font-weight: 600;
-  }
+  /* NAV */
+  nav { display:flex; align-items:center; justify-content:space-between; padding:18px 40px; border-bottom:1px solid var(--border); background:rgba(7,8,16,0.9); backdrop-filter:blur(20px); position:sticky; top:0; z-index:100; flex-wrap:wrap; gap:10px; }
+  .logo { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:4px; color:var(--accent); text-shadow:0 0 30px rgba(232,255,71,0.4); }
+  .logo span { color:var(--text); }
+  .nav-right { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .plan-pill { border-radius:20px; padding:5px 14px; font-size:12px; font-family:'JetBrains Mono',monospace; border:1px solid var(--border); }
+  .plan-pill.free { background:var(--card); color:var(--muted); }
+  .plan-pill.bronze { background:rgba(205,127,50,0.15); border-color:rgba(205,127,50,0.4); color:var(--bronze); }
+  .plan-pill.silver { background:rgba(192,192,192,0.15); border-color:rgba(192,192,192,0.4); color:var(--silver); }
+  .plan-pill.gold { background:rgba(255,215,0,0.15); border-color:rgba(255,215,0,0.4); color:var(--gold); }
+  .nav-btn { background:none; border:1px solid var(--border); color:var(--text); padding:7px 16px; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:13px; cursor:pointer; transition:all 0.2s; }
+  .nav-btn:hover { border-color:var(--accent); color:var(--accent); }
+  .btn-upgrade { background:linear-gradient(135deg,#f59e0b,#ef4444); color:#fff; border:none; padding:8px 18px; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600; cursor:pointer; transition:all 0.2s; }
+  .btn-upgrade:hover { opacity:0.9; transform:translateY(-1px); }
 
   /* PAGES */
-  .page { display: none; }
-  .page.active { display: block; }
+  .page { display:none; }
+  .page.active { display:block; }
 
   /* HERO */
-  .hero {
-    padding: 80px 40px 60px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
+  .hero { padding:60px 40px 40px; text-align:center; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; top:-100px; left:50%; transform:translateX(-50%); width:600px; height:400px; background:radial-gradient(ellipse,rgba(232,255,71,0.07) 0%,transparent 70%); pointer-events:none; }
+  .hero-tag { display:inline-block; background:rgba(232,255,71,0.1); border:1px solid rgba(232,255,71,0.25); color:var(--accent); font-size:11px; letter-spacing:3px; text-transform:uppercase; padding:5px 14px; border-radius:20px; margin-bottom:20px; font-family:'JetBrains Mono',monospace; }
+  .hero h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(50px,8vw,90px); line-height:0.92; letter-spacing:2px; margin-bottom:16px; }
+  .hero h1 .highlight { color:var(--accent); text-shadow:0 0 60px rgba(232,255,71,0.3); }
+  .hero p { color:var(--muted); font-size:15px; max-width:480px; margin:0 auto 32px; line-height:1.7; font-weight:300; }
 
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -100px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 400px;
-    background: radial-gradient(ellipse, rgba(232,255,71,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero-tag {
-    display: inline-block;
-    background: rgba(232,255,71,0.1);
-    border: 1px solid rgba(232,255,71,0.25);
-    color: var(--accent);
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 6px 16px;
-    border-radius: 20px;
-    margin-bottom: 24px;
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-  .hero h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(56px, 8vw, 100px);
-    line-height: 0.92;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-  }
-
-  .hero h1 .highlight {
-    color: var(--accent);
-    text-shadow: 0 0 60px rgba(232,255,71,0.3);
-  }
-
-  .hero p {
-    color: var(--muted);
-    font-size: 16px;
-    max-width: 500px;
-    margin: 0 auto 40px;
-    line-height: 1.7;
-    font-weight: 300;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    background: var(--accent);
-    color: #000;
-    border: none;
-    padding: 14px 32px;
-    border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.3px;
-  }
-
-  .btn-primary:hover {
-    background: #d4f000;
-    transform: translateY(-1px);
-    box-shadow: 0 8px 30px rgba(232,255,71,0.25);
-  }
-
-  .btn-premium {
-    background: var(--premium);
-    color: #fff;
-    border: none;
-    padding: 14px 32px;
-    border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn-premium::before {
-    content: '✦';
-    margin-right: 8px;
-  }
-
-  .btn-premium:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 30px rgba(245,158,11,0.35);
-  }
-
-  .btn-ghost {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 14px 32px;
-    border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .btn-ghost:hover { border-color: rgba(255,255,255,0.3); }
-
-  /* STATS BAR */
-  .stats-bar {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    padding: 30px 40px;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    background: var(--surface);
-    flex-wrap: wrap;
-  }
-
-  .stat { text-align: center; }
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    color: var(--accent);
-    letter-spacing: 1px;
-  }
-  .stat-label {
-    font-size: 11px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 2px;
-  }
+  /* PLAN CARDS ROW */
+  .plans-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; padding:0 40px 40px; }
+  .plan-card-mini { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:18px 22px; text-align:center; min-width:150px; cursor:pointer; transition:all 0.25s; position:relative; }
+  .plan-card-mini:hover { transform:translateY(-3px); }
+  .plan-card-mini.free-card:hover { border-color:rgba(232,255,71,0.3); }
+  .plan-card-mini.bronze-card { border-color:rgba(205,127,50,0.2); }
+  .plan-card-mini.bronze-card:hover { border-color:var(--bronze); box-shadow:0 8px 30px rgba(205,127,50,0.15); }
+  .plan-card-mini.silver-card { border-color:rgba(192,192,192,0.2); }
+  .plan-card-mini.silver-card:hover { border-color:var(--silver); box-shadow:0 8px 30px rgba(192,192,192,0.15); }
+  .plan-card-mini.gold-card { border-color:rgba(255,215,0,0.2); }
+  .plan-card-mini.gold-card:hover { border-color:var(--gold); box-shadow:0 8px 30px rgba(255,215,0,0.2); }
+  .plan-card-mini .p-icon { font-size:28px; margin-bottom:8px; }
+  .plan-card-mini .p-name { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:2px; margin-bottom:4px; }
+  .plan-card-mini .p-price { font-size:13px; color:var(--muted); margin-bottom:8px; font-family:'JetBrains Mono',monospace; }
+  .plan-card-mini .p-time { font-size:12px; font-weight:600; padding:4px 10px; border-radius:20px; display:inline-block; }
+  .free-time { background:rgba(232,255,71,0.1); color:var(--accent); }
+  .bronze-time { background:rgba(205,127,50,0.15); color:var(--bronze); }
+  .silver-time { background:rgba(192,192,192,0.15); color:var(--silver); }
+  .gold-time { background:rgba(255,215,0,0.15); color:var(--gold); }
+  .plan-card-mini .p-btn { margin-top:12px; width:100%; padding:8px; border-radius:8px; border:none; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:600; cursor:pointer; transition:all 0.2s; }
+  .free-btn { background:rgba(232,255,71,0.1); color:var(--accent); border:1px solid rgba(232,255,71,0.2) !important; }
+  .bronze-btn { background:rgba(205,127,50,0.2); color:var(--bronze); }
+  .silver-btn { background:rgba(192,192,192,0.2); color:var(--silver); }
+  .gold-btn { background:rgba(255,215,0,0.2); color:var(--gold); }
+  .current-badge { position:absolute; top:-8px; right:12px; font-size:9px; padding:2px 8px; border-radius:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; background:var(--accent); color:#000; }
 
   /* SECTION */
-  .section {
-    padding: 60px 40px;
-    max-width: 1300px;
-    margin: 0 auto;
-  }
-
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    letter-spacing: 2px;
-  }
-
-  .section-count {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--muted);
-    background: var(--card);
-    padding: 3px 10px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-  }
+  .section { padding:40px; max-width:1300px; margin:0 auto; }
+  .section-header { display:flex; align-items:baseline; gap:16px; margin-bottom:24px; }
+  .section-title { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:2px; }
+  .section-count { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted); background:var(--card); padding:3px 10px; border-radius:20px; border:1px solid var(--border); }
 
   /* VIDEO GRID */
-  .video-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-  }
+  .video-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:18px; }
+  .video-card { background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; transition:all 0.3s; cursor:pointer; }
+  .video-card:hover { border-color:rgba(255,255,255,0.15); transform:translateY(-3px); box-shadow:0 20px 40px rgba(0,0,0,0.4); }
+  .video-thumb { width:100%; aspect-ratio:16/9; position:relative; overflow:hidden; }
+  .thumb-bg { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:44px; position:relative; }
+  .thumb-duration { position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.75); color:#fff; font-size:11px; font-family:'JetBrains Mono',monospace; padding:2px 7px; border-radius:4px; }
+  .thumb-play { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:44px; height:44px; background:rgba(255,255,255,0.15); backdrop-filter:blur(8px); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; opacity:0; transition:opacity 0.2s; }
+  .video-card:hover .thumb-play { opacity:1; }
+  .video-info { padding:14px; }
+  .video-category { font-size:10px; text-transform:uppercase; letter-spacing:2px; color:var(--accent); margin-bottom:5px; font-family:'JetBrains Mono',monospace; }
+  .video-title { font-size:14px; font-weight:500; margin-bottom:10px; line-height:1.4; }
+  .video-meta { display:flex; align-items:center; justify-content:space-between; font-size:12px; color:var(--muted); }
+  .watch-btn { display:flex; align-items:center; gap:5px; background:rgba(232,255,71,0.08); border:1px solid rgba(232,255,71,0.2); color:var(--accent); padding:6px 12px; border-radius:8px; font-size:12px; font-weight:500; cursor:pointer; transition:all 0.2s; font-family:'DM Sans',sans-serif; }
+  .watch-btn:hover { background:rgba(232,255,71,0.15); }
 
-  .video-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    overflow: hidden;
-    transition: all 0.3s;
-    cursor: pointer;
-  }
+  /* VIDEO PLAYER MODAL */
+  .player-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); backdrop-filter:blur(12px); z-index:500; align-items:center; justify-content:center; padding:20px; }
+  .player-overlay.open { display:flex; }
+  .player-modal { background:var(--card); border:1px solid rgba(255,255,255,0.1); border-radius:20px; padding:30px; max-width:600px; width:100%; position:relative; animation:modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+  .player-screen { width:100%; aspect-ratio:16/9; border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; margin-bottom:16px; font-size:60px; position:relative; overflow:hidden; }
+  .player-title { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:1px; margin-bottom:8px; }
+  .timer-bar-wrap { width:100%; height:6px; background:var(--surface); border-radius:3px; margin-bottom:8px; overflow:hidden; }
+  .timer-bar { height:100%; border-radius:3px; transition:width 1s linear; }
+  .timer-text { font-size:12px; font-family:'JetBrains Mono',monospace; color:var(--muted); margin-bottom:16px; }
+  .player-controls { display:flex; gap:10px; }
+  .ctrl-btn { flex:1; padding:10px; border-radius:10px; border:none; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600; cursor:pointer; transition:all 0.2s; }
+  .ctrl-stop { background:var(--surface); color:var(--text); border:1px solid var(--border) !important; }
+  .ctrl-upgrade { background:linear-gradient(135deg,#f59e0b,#ef4444); color:#fff; }
 
-  .video-card:hover {
-    border-color: rgba(255,255,255,0.15);
-    transform: translateY(-3px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-  }
+  /* UPGRADE MODAL */
+  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(10px); z-index:600; align-items:center; justify-content:center; padding:20px; }
+  .modal-overlay.open { display:flex; }
+  .modal { background:var(--card); border:1px solid rgba(255,255,255,0.1); border-radius:20px; padding:36px; max-width:500px; width:100%; position:relative; animation:modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1); max-height:90vh; overflow-y:auto; }
+  @keyframes modalIn { from{opacity:0;transform:scale(0.9) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
+  .modal-close { position:absolute; top:14px; right:14px; background:var(--surface); border:1px solid var(--border); color:var(--muted); width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:15px; transition:all 0.2s; }
+  .modal-close:hover { color:var(--text); }
+  .modal h2 { font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:2px; margin-bottom:6px; }
+  .modal p { color:var(--muted); font-size:13px; line-height:1.6; margin-bottom:20px; }
 
-  .video-thumb {
-    width: 100%;
-    aspect-ratio: 16/9;
-    position: relative;
-    overflow: hidden;
-  }
+  /* PLAN SELECT CARDS */
+  .plan-select-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
+  .psc { background:var(--surface); border:2px solid var(--border); border-radius:12px; padding:16px; cursor:pointer; transition:all 0.2s; text-align:center; }
+  .psc:hover { border-color:rgba(255,255,255,0.2); }
+  .psc.selected-bronze { border-color:var(--bronze); background:rgba(205,127,50,0.05); }
+  .psc.selected-silver { border-color:var(--silver); background:rgba(192,192,192,0.05); }
+  .psc.selected-gold { border-color:var(--gold); background:rgba(255,215,0,0.05); }
+  .psc-icon { font-size:24px; margin-bottom:6px; }
+  .psc-name { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:1px; margin-bottom:3px; }
+  .psc-price { font-family:'JetBrains Mono',monospace; font-size:16px; font-weight:600; margin-bottom:3px; }
+  .psc-time { font-size:11px; color:var(--muted); }
+  .pay-btn { width:100%; padding:14px; border-radius:10px; border:none; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600; cursor:pointer; transition:all 0.2s; margin-top:4px; }
+  .pay-btn-bronze { background:linear-gradient(135deg,#cd7f32,#a0522d); color:#fff; }
+  .pay-btn-silver { background:linear-gradient(135deg,#c0c0c0,#808080); color:#000; }
+  .pay-btn-gold { background:linear-gradient(135deg,#ffd700,#ff8c00); color:#000; }
+  .razorpay-note { display:flex; align-items:center; gap:8px; font-size:11px; color:var(--muted); margin:12px 0; }
+  .rz-icon { background:#072654; border-radius:4px; padding:3px 7px; font-size:10px; font-weight:700; color:#4fa0ff; font-family:'JetBrains Mono',monospace; }
 
-  .thumb-bg {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-    position: relative;
-  }
-
-  .thumb-duration {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    background: rgba(0,0,0,0.75);
-    color: #fff;
-    font-size: 11px;
-    font-family: 'JetBrains Mono', monospace;
-    padding: 2px 7px;
-    border-radius: 4px;
-  }
-
-  .thumb-play {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 44px;
-    height: 44px;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(8px);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  .video-card:hover .thumb-play { opacity: 1; }
-
-  .video-info {
-    padding: 16px;
-  }
-
-  .video-category {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--accent);
-    margin-bottom: 6px;
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-  .video-title {
-    font-size: 15px;
-    font-weight: 500;
-    margin-bottom: 8px;
-    line-height: 1.4;
-  }
-
-  .video-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  .video-views { display: flex; align-items: center; gap: 5px; }
-
-  .download-btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(232,255,71,0.08);
-    border: 1px solid rgba(232,255,71,0.2);
-    color: var(--accent);
-    padding: 7px 14px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: 'DM Sans', sans-serif;
-  }
-
-  .download-btn:hover {
-    background: rgba(232,255,71,0.15);
-    border-color: rgba(232,255,71,0.4);
-  }
-
-  .download-btn svg { width: 13px; height: 13px; }
-
-  /* PLAN BANNER */
-  .plan-banner {
-    margin: 0 40px 40px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 20px 28px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: gap;
-    gap: 16px;
-  }
-
-  .plan-info { display: flex; align-items: center; gap: 16px; }
-
-  .plan-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    background: rgba(232,255,71,0.1);
-    border: 1px solid rgba(232,255,71,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-  }
-
-  .plan-text { font-size: 14px; }
-  .plan-text strong { display: block; margin-bottom: 2px; }
-  .plan-text span { color: var(--muted); font-size: 13px; }
-
-  .quota-bar {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .quota-track {
-    width: 120px;
-    height: 6px;
-    background: var(--card);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .quota-fill {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 3px;
-    transition: width 0.4s ease;
-  }
-
-  .quota-text {
-    font-size: 12px;
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--muted);
-    white-space: nowrap;
-  }
-
-  /* MODAL */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.8);
-    backdrop-filter: blur(8px);
-    z-index: 500;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-
-  .modal-overlay.open { display: flex; }
-
-  .modal {
-    background: var(--card);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 20px;
-    padding: 40px;
-    max-width: 480px;
-    width: 100%;
-    position: relative;
-    animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
-  }
-
-  @keyframes modalIn {
-    from { opacity: 0; transform: scale(0.9) translateY(20px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--muted);
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 16px;
-    transition: all 0.2s;
-  }
-
-  .modal-close:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
-
-  .modal-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 16px;
-    background: var(--premium);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-
-  .modal h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-  }
-
-  .modal p {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 24px;
-  }
-
-  .plan-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-
-  .plan-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 18px;
-    cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
-  }
-
-  .plan-card:hover { border-color: rgba(255,255,255,0.2); }
-  .plan-card.selected { border-color: var(--accent); background: rgba(232,255,71,0.05); }
-
-  .plan-card-name {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-    margin-bottom: 8px;
-  }
-
-  .plan-card-price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-  }
-
-  .plan-card-price span {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--muted);
-    letter-spacing: 0;
-  }
-
-  .plan-card-feature {
-    font-size: 11px;
-    color: var(--muted);
-  }
-
-  .plan-card .badge {
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    background: var(--premium);
-    color: #fff;
-    font-size: 9px;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  .features-list {
-    background: var(--surface);
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 24px;
-  }
-
-  .feature-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    padding: 6px 0;
-    color: var(--text);
-  }
-
-  .feature-item + .feature-item {
-    border-top: 1px solid var(--border);
-  }
-
-  .feature-check {
-    width: 20px;
-    height: 20px;
-    border-radius: 6px;
-    background: rgba(232,255,71,0.1);
-    border: 1px solid rgba(232,255,71,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    flex-shrink: 0;
-  }
-
-  .razorpay-note {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 20px;
-  }
-
-  .razorpay-note .rz-icon {
-    background: #072654;
-    border-radius: 6px;
-    padding: 4px 8px;
-    font-size: 11px;
-    font-weight: 700;
-    color: #4fa0ff;
-    font-family: 'JetBrains Mono', monospace;
-  }
+  /* EMAIL RECEIPT MODAL */
+  .receipt-modal { background:var(--card); border:1px solid rgba(255,255,255,0.1); border-radius:20px; padding:36px; max-width:420px; width:100%; position:relative; animation:modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+  .receipt-header { text-align:center; margin-bottom:20px; }
+  .receipt-icon { font-size:48px; margin-bottom:10px; }
+  .receipt-title { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:2px; margin-bottom:4px; }
+  .receipt-sub { font-size:13px; color:var(--muted); }
+  .invoice-box { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:18px; margin:16px 0; }
+  .invoice-row { display:flex; justify-content:space-between; font-size:13px; padding:6px 0; }
+  .invoice-row + .invoice-row { border-top:1px solid var(--border); }
+  .invoice-row.total { font-weight:600; font-size:14px; color:var(--text); }
+  .invoice-label { color:var(--muted); }
+  .email-note { display:flex; align-items:center; gap:8px; background:rgba(232,255,71,0.05); border:1px solid rgba(232,255,71,0.15); border-radius:10px; padding:12px; font-size:12px; color:var(--accent); margin-bottom:16px; }
+  .close-receipt-btn { width:100%; padding:12px; background:var(--accent); color:#000; border:none; border-radius:10px; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:700; cursor:pointer; }
 
   /* TOAST */
-  .toast-container {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 900;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+  .toast-container { position:fixed; bottom:24px; right:24px; z-index:900; display:flex; flex-direction:column; gap:8px; }
+  .toast { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:12px 18px; font-size:13px; display:flex; align-items:center; gap:10px; min-width:240px; animation:toastIn 0.3s ease; box-shadow:0 8px 30px rgba(0,0,0,0.4); }
+  .toast.success { border-color:rgba(232,255,71,0.3); }
+  .toast.error { border-color:rgba(255,80,80,0.3); }
+  @keyframes toastIn { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
 
-  .toast {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px 20px;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 260px;
-    animation: toastIn 0.3s ease;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-  }
-
-  .toast.success { border-color: rgba(232,255,71,0.3); }
-  .toast.error { border-color: rgba(255,80,80,0.3); }
-  .toast.info { border-color: rgba(77,166,255,0.3); }
-
-  @keyframes toastIn {
-    from { opacity: 0; transform: translateX(30px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  .toast-icon { font-size: 18px; }
-
-  /* DOWNLOADS PAGE */
-  .downloads-empty {
-    text-align: center;
-    padding: 80px 20px;
-    color: var(--muted);
-  }
-
-  .downloads-empty .empty-icon {
-    font-size: 56px;
-    margin-bottom: 16px;
-    opacity: 0.4;
-  }
-
-  .downloads-empty h3 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-    color: var(--text);
-    opacity: 0.5;
-  }
-
-  .downloads-empty p { font-size: 14px; }
-
-  .download-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .dl-item {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .dl-thumb {
-    width: 70px;
-    height: 44px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    flex-shrink: 0;
-  }
-
-  .dl-info { flex: 1; }
-  .dl-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
-  .dl-meta { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
-
-  .dl-status {
-    font-size: 11px;
-    padding: 4px 10px;
-    border-radius: 20px;
-    background: rgba(232,255,71,0.1);
-    border: 1px solid rgba(232,255,71,0.2);
-    color: var(--accent);
-  }
-
-  /* PROFILE PAGE */
-  .profile-header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 40px;
-  }
-
-  .profile-avatar {
-    width: 72px;
-    height: 72px;
-    border-radius: 18px;
-    background: linear-gradient(135deg, #4da6ff, #7c4dff);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    margin-bottom: 16px;
-  }
-
-  .profile-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 2px;
-    margin-bottom: 4px;
-  }
-
-  .profile-plan {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    padding: 4px 12px;
-    border-radius: 20px;
-  }
-
-  .profile-plan.free {
-    background: var(--card);
-    border: 1px solid var(--border);
-    color: var(--muted);
-  }
-
-  .profile-plan.premium {
-    background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(239,68,68,0.15));
-    border: 1px solid rgba(245,158,11,0.3);
-    color: #f59e0b;
-  }
-
-  .profile-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    padding: 24px 40px;
-  }
-
-  .profile-stat-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-  }
-
-  .profile-stat-label {
-    font-size: 11px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-  }
-
-  .profile-stat-value {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    letter-spacing: 1px;
-    color: var(--accent);
-  }
-
-  .profile-stat-sub {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
+  /* PROFILE */
+  .profile-header { background:var(--surface); border-bottom:1px solid var(--border); padding:36px 40px; }
+  .profile-avatar { width:64px; height:64px; border-radius:16px; background:linear-gradient(135deg,#4da6ff,#7c4dff); display:flex; align-items:center; justify-content:center; font-size:28px; margin-bottom:14px; }
+  .profile-name { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:2px; margin-bottom:6px; }
+  .profile-stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; padding:24px 40px; }
+  .profile-stat-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px; }
+  .profile-stat-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:2px; margin-bottom:6px; }
+  .profile-stat-value { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:1px; color:var(--accent); }
+  .profile-stat-sub { font-size:12px; color:var(--muted); margin-top:2px; }
 
   /* THUMB COLORS */
-  .tc1 { background: linear-gradient(135deg, #1a1a2e, #16213e); }
-  .tc2 { background: linear-gradient(135deg, #0f2027, #203a43); }
-  .tc3 { background: linear-gradient(135deg, #1a0533, #2d1b69); }
-  .tc4 { background: linear-gradient(135deg, #0d1117, #1f2937); }
-  .tc5 { background: linear-gradient(135deg, #14001a, #3d0000); }
-  .tc6 { background: linear-gradient(135deg, #001f0f, #003d1f); }
+  .tc1{background:linear-gradient(135deg,#1a1a2e,#16213e)}
+  .tc2{background:linear-gradient(135deg,#0f2027,#203a43)}
+  .tc3{background:linear-gradient(135deg,#1a0533,#2d1b69)}
+  .tc4{background:linear-gradient(135deg,#0d1117,#1f2937)}
+  .tc5{background:linear-gradient(135deg,#14001a,#3d0000)}
+  .tc6{background:linear-gradient(135deg,#001f0f,#003d1f)}
 
-  .premium-glow {
-    animation: premiumPulse 2s ease-in-out infinite;
-  }
-
-  @keyframes premiumPulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,0); }
-    50% { box-shadow: 0 0 20px 4px rgba(245,158,11,0.15); }
-  }
-
-  @media (max-width: 640px) {
-    nav { padding: 14px 20px; }
-    .hero { padding: 40px 20px; }
-    .section { padding: 40px 20px; }
-    .stats-bar { gap: 30px; }
-    .plan-banner { margin: 0 20px 30px; flex-direction: column; }
-    .profile-stats-grid { grid-template-columns: 1fr 1fr; }
-    .plan-cards { grid-template-columns: 1fr; }
+  @media(max-width:640px){
+    nav{padding:14px 20px}
+    .hero{padding:36px 20px 28px}
+    .plans-row{padding:0 20px 28px}
+    .plan-card-mini{min-width:130px}
+    .section{padding:28px 20px}
+    .profile-header{padding:28px 20px}
+    .profile-stats-grid{grid-template-columns:1fr 1fr;padding:16px 20px}
+    .plan-select-grid{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -885,420 +201,72 @@
 <nav>
   <div class="logo">LUMI<span>VID</span></div>
   <div class="nav-right">
-    <div class="nav-badge" id="planBadge">FREE PLAN</div>
+    <div class="plan-pill free" id="planPill">FREE</div>
     <button class="nav-btn" onclick="showPage('home')">Browse</button>
-    <button class="nav-btn" onclick="showPage('downloads')">Downloads</button>
     <button class="nav-btn" onclick="showPage('profile')">Profile</button>
-    <button class="btn-premium" onclick="openPremiumModal()" id="upgradeBtn">Upgrade</button>
+    <button class="btn-upgrade" onclick="openUpgradeModal()">⬆ Upgrade Plan</button>
   </div>
 </nav>
 
-<!-- ═══ HOME PAGE ═══ -->
+<!-- HOME PAGE -->
 <div class="page active" id="page-home">
-  <!-- HERO -->
   <div class="hero">
-    <div class="hero-tag">▶ Stream · Download · Enjoy</div>
+    <div class="hero-tag">▶ Stream · 4 Plans · Razorpay Payments</div>
     <h1>Watch Without<br><span class="highlight">Limits.</span></h1>
-    <p>Discover thousands of videos across every genre. Download your favorites to watch offline, anytime.</p>
-    <div class="hero-actions">
-      <button class="btn-primary" onclick="document.getElementById('videos-section').scrollIntoView({behavior:'smooth'})">Browse Videos</button>
-      <button class="btn-premium premium-glow" onclick="openPremiumModal()">Get Premium — ₹199/mo</button>
+    <p>Choose your plan and unlock more watch time. Upgrade anytime with instant access.</p>
+  </div>
+
+  <!-- PLAN CARDS ROW -->
+  <div class="plans-row" id="plansRow">
+    <div class="plan-card-mini free-card" id="minicard-free">
+      <div class="current-badge" id="badge-free">CURRENT</div>
+      <div class="p-icon">🆓</div>
+      <div class="p-name">Free</div>
+      <div class="p-price">₹0</div>
+      <div class="p-time free-time">5 min/video</div>
+      <button class="p-btn free-btn" disabled>Active</button>
+    </div>
+    <div class="plan-card-mini bronze-card" id="minicard-bronze" onclick="openUpgradeModal('bronze')">
+      <div class="p-icon">🥉</div>
+      <div class="p-name" style="color:var(--bronze)">Bronze</div>
+      <div class="p-price" style="color:var(--bronze)">₹10</div>
+      <div class="p-time bronze-time">7 min/video</div>
+      <button class="p-btn bronze-btn">Upgrade →</button>
+    </div>
+    <div class="plan-card-mini silver-card" id="minicard-silver" onclick="openUpgradeModal('silver')">
+      <div class="p-icon">🥈</div>
+      <div class="p-name" style="color:var(--silver)">Silver</div>
+      <div class="p-price" style="color:var(--silver)">₹50</div>
+      <div class="p-time silver-time">10 min/video</div>
+      <button class="p-btn silver-btn">Upgrade →</button>
+    </div>
+    <div class="plan-card-mini gold-card" id="minicard-gold" onclick="openUpgradeModal('gold')">
+      <div class="p-icon">🥇</div>
+      <div class="p-name" style="color:var(--gold)">Gold</div>
+      <div class="p-price" style="color:var(--gold)">₹100</div>
+      <div class="p-time gold-time">∞ Unlimited</div>
+      <button class="p-btn gold-btn">Upgrade →</button>
     </div>
   </div>
 
-  <!-- STATS -->
-  <div class="stats-bar">
-    <div class="stat"><div class="stat-num">12K+</div><div class="stat-label">Videos</div></div>
-    <div class="stat"><div class="stat-num">4K</div><div class="stat-label">Max Quality</div></div>
-    <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Premium Downloads</div></div>
-    <div class="stat"><div class="stat-num">1</div><div class="stat-label">Free Download/Day</div></div>
-  </div>
-
-  <!-- PLAN BANNER -->
-  <div class="section" style="padding-bottom:0;">
-    <div class="plan-banner" id="planBanner" style="margin:0 0 0 0;">
-      <div class="plan-info">
-        <div class="plan-icon" id="bannerIcon">🆓</div>
-        <div class="plan-text">
-          <strong id="bannerTitle">Free Plan</strong>
-          <span id="bannerDesc">1 download per day · Upgrade for unlimited access</span>
-        </div>
-      </div>
-      <div class="quota-bar" id="quotaBar">
-        <div class="quota-track">
-          <div class="quota-fill" id="quotaFill" style="width:0%"></div>
-        </div>
-        <div class="quota-text" id="quotaText">0 / 1 today</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- VIDEO GRID -->
-  <div class="section" id="videos-section">
+  <!-- VIDEOS -->
+  <div class="section">
     <div class="section-header">
       <div class="section-title">Trending Now</div>
-      <div class="section-count">24 videos</div>
+      <div class="section-count">12 videos</div>
     </div>
     <div class="video-grid" id="videoGrid"></div>
   </div>
 </div>
 
-<!-- ═══ DOWNLOADS PAGE ═══ -->
-<div class="page" id="page-downloads">
-  <div class="section">
-    <div class="section-header">
-      <div class="section-title">My Downloads</div>
-      <div class="section-count" id="dlCount">0 files</div>
-    </div>
-    <div id="downloadContent"></div>
-  </div>
-</div>
-
-<!-- ═══ PROFILE PAGE ═══ -->
+<!-- PROFILE PAGE -->
 <div class="page" id="page-profile">
   <div class="profile-header">
     <div class="profile-avatar">👤</div>
     <div class="profile-name">Alex Rivera</div>
-    <div class="profile-plan free" id="profilePlan">⬡ Free Member</div>
+    <div class="plan-pill free" id="profilePlanPill" style="display:inline-block">⬡ Free Member</div>
   </div>
   <div class="profile-stats-grid">
     <div class="profile-stat-card">
-      <div class="profile-stat-label">Downloads Today</div>
-      <div class="profile-stat-value" id="statToday">0</div>
-      <div class="profile-stat-sub" id="statLimit">of 1 free</div>
-    </div>
-    <div class="profile-stat-card">
-      <div class="profile-stat-label">Total Downloads</div>
-      <div class="profile-stat-value" id="statTotal">0</div>
-      <div class="profile-stat-sub">all time</div>
-    </div>
-    <div class="profile-stat-card">
-      <div class="profile-stat-label">Plan Status</div>
-      <div class="profile-stat-value" id="statPlan" style="font-size:22px;padding-top:6px;">FREE</div>
-      <div class="profile-stat-sub" id="statPlanSub">Upgrade to Premium</div>
-    </div>
-  </div>
-  <div class="section" style="padding-top:0">
-    <button class="btn-premium premium-glow" style="width:100%;padding:16px" onclick="openPremiumModal()">
-      Upgrade to Premium — Unlimited Downloads
-    </button>
-  </div>
-</div>
-
-<!-- ═══ PREMIUM MODAL ═══ -->
-<div class="modal-overlay" id="premiumModal">
-  <div class="modal">
-    <button class="modal-close" onclick="closePremiumModal()">✕</button>
-    <div class="modal-icon">✦</div>
-    <h2>Go Premium</h2>
-    <p>Unlock unlimited downloads, 4K quality, and early access to new content. Cancel anytime.</p>
-
-    <div class="plan-cards">
-      <div class="plan-card selected" id="plan-monthly" onclick="selectPlan('monthly')">
-        <div class="plan-card-name">Monthly</div>
-        <div class="plan-card-price">₹199<span>/mo</span></div>
-        <div class="plan-card-feature">Billed monthly</div>
-      </div>
-      <div class="plan-card" id="plan-yearly" onclick="selectPlan('yearly')">
-        <div class="badge">SAVE 40%</div>
-        <div class="plan-card-name">Yearly</div>
-        <div class="plan-card-price">₹119<span>/mo</span></div>
-        <div class="plan-card-feature">₹1,428 billed annually</div>
-      </div>
-    </div>
-
-    <div class="features-list">
-      <div class="feature-item"><div class="feature-check">✓</div> Unlimited video downloads daily</div>
-      <div class="feature-item"><div class="feature-check">✓</div> 4K Ultra HD streaming quality</div>
-      <div class="feature-item"><div class="feature-check">✓</div> Offline viewing in the app</div>
-      <div class="feature-item"><div class="feature-check">✓</div> Priority customer support</div>
-      <div class="feature-item"><div class="feature-check">✓</div> Early access to new releases</div>
-    </div>
-
-    <div class="razorpay-note">
-      <span class="rz-icon">RZ</span>
-      Secured by Razorpay · Test mode active
-    </div>
-
-    <button class="btn-premium" style="width:100%;padding:16px;font-size:15px" onclick="initiatePayment()" id="payBtn">
-      Pay &amp; Unlock Premium
-    </button>
-  </div>
-</div>
-
-<!-- TOAST CONTAINER -->
-<div class="toast-container" id="toastContainer"></div>
-
-<script>
-// ─── STATE ──────────────────────────────────────────────────────────────────
-const state = {
-  isPremium: false,
-  downloadsToday: 0,
-  freeLimit: 1,
-  totalDownloads: 0,
-  downloads: [],
-  selectedPlan: 'monthly',
-  plans: {
-    monthly: { price: 199, label: '₹199/month' },
-    yearly:  { price: 1428, label: '₹1,428/year' }
-  }
-};
-
-// ─── VIDEOS DATA ─────────────────────────────────────────────────────────────
-const videos = [
-  { id:1, title:'Chasing Northern Lights in Iceland', category:'TRAVEL', views:'2.4M', duration:'18:32', emoji:'🌌', thumb:'tc1' },
-  { id:2, title:'Master React in 90 Minutes', category:'TECH', views:'5.1M', duration:'1:28:04', emoji:'⚛️', thumb:'tc2' },
-  { id:3, title:'Deep Space: The Final Frontier', category:'SCIENCE', views:'3.8M', duration:'44:10', emoji:'🚀', thumb:'tc3' },
-  { id:4, title:'Street Food: Tokyo After Midnight', category:'FOOD', views:'7.2M', duration:'22:15', emoji:'🍜', thumb:'tc4' },
-  { id:5, title:'Epic Mountain Bike Descent', category:'SPORTS', views:'1.9M', duration:'8:47', emoji:'🚵', thumb:'tc5' },
-  { id:6, title:'The Art of Bonsai: 1000 Years', category:'CULTURE', views:'890K', duration:'31:20', emoji:'🌿', thumb:'tc6' },
-  { id:7, title:'Building a Neural Net from Scratch', category:'TECH', views:'3.3M', duration:'56:44', emoji:'🧠', thumb:'tc1' },
-  { id:8, title:'Amazon River: Life Below', category:'NATURE', views:'4.5M', duration:'1:02:18', emoji:'🐊', thumb:'tc2' },
-  { id:9, title:'Lo-Fi Beats: 3 Hour Study Session', category:'MUSIC', views:'12.1M', duration:'3:00:00', emoji:'🎵', thumb:'tc3' },
-  { id:10, title:'Beginner\'s Guide to Sourdough', category:'FOOD', views:'2.1M', duration:'25:30', emoji:'🍞', thumb:'tc4' },
-  { id:11, title:'The Psychology of Color', category:'DESIGN', views:'1.4M', duration:'14:22', emoji:'🎨', thumb:'tc5' },
-  { id:12, title:'Formula 1: Physics at 300km/h', category:'SCIENCE', views:'6.7M', duration:'38:55', emoji:'🏎️', thumb:'tc6' },
-];
-
-// ─── RENDER VIDEOS ───────────────────────────────────────────────────────────
-function renderVideos() {
-  const grid = document.getElementById('videoGrid');
-  grid.innerHTML = videos.map(v => `
-    <div class="video-card">
-      <div class="video-thumb">
-        <div class="thumb-bg ${v.thumb}">
-          <span>${v.emoji}</span>
-          <div class="thumb-play">▶</div>
-          <div class="thumb-duration">${v.duration}</div>
-        </div>
-      </div>
-      <div class="video-info">
-        <div class="video-category">${v.category}</div>
-        <div class="video-title">${v.title}</div>
-        <div class="video-meta">
-          <div class="video-views">👁 ${v.views} views</div>
-          <button class="download-btn" onclick="downloadVideo(${v.id}, '${v.title}', '${v.emoji}', '${v.thumb}')">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-            </svg>
-            Download
-          </button>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-// ─── DOWNLOAD LOGIC ───────────────────────────────────────────────────────────
-function downloadVideo(id, title, emoji, thumb) {
-  if (!state.isPremium && state.downloadsToday >= state.freeLimit) {
-    showToast('error', '🚫', 'Daily limit reached! Upgrade to Premium for unlimited downloads.');
-    setTimeout(() => openPremiumModal(), 1000);
-    return;
-  }
-
-  // Simulate download
-  state.downloadsToday++;
-  state.totalDownloads++;
-
-  const alreadyDl = state.downloads.find(d => d.id === id);
-  if (!alreadyDl) {
-    state.downloads.unshift({
-      id, title, emoji, thumb,
-      downloadedAt: new Date().toLocaleString(),
-      size: `${(Math.random()*800+200).toFixed(0)} MB`
-    });
-  }
-
-  updateUI();
-  showToast('success', '✅', `"${title.slice(0,35)}..." added to Downloads!`);
-}
-
-// ─── UPDATE UI ───────────────────────────────────────────────────────────────
-function updateUI() {
-  const isPrem = state.isPremium;
-
-  // Nav badge
-  document.getElementById('planBadge').textContent = isPrem ? '★ PREMIUM' : 'FREE PLAN';
-  document.getElementById('planBadge').className = 'nav-badge' + (isPrem ? ' premium-badge' : '');
-
-  // Upgrade button
-  document.getElementById('upgradeBtn').style.display = isPrem ? 'none' : 'block';
-
-  // Plan banner
-  if (isPrem) {
-    document.getElementById('bannerIcon').textContent = '⭐';
-    document.getElementById('bannerTitle').textContent = 'Premium Plan';
-    document.getElementById('bannerDesc').textContent = 'Unlimited downloads · 4K quality';
-    document.getElementById('quotaBar').innerHTML = `<div class="quota-text" style="color:var(--accent)">∞ Unlimited</div>`;
-  } else {
-    const pct = Math.min((state.downloadsToday / state.freeLimit) * 100, 100);
-    document.getElementById('quotaFill').style.width = pct + '%';
-    document.getElementById('quotaText').textContent = `${state.downloadsToday} / ${state.freeLimit} today`;
-  }
-
-  // Profile stats
-  document.getElementById('statToday').textContent = state.downloadsToday;
-  document.getElementById('statTotal').textContent = state.totalDownloads;
-  document.getElementById('statLimit').textContent = isPrem ? 'unlimited' : `of ${state.freeLimit} free`;
-  document.getElementById('statPlan').textContent = isPrem ? 'PRO' : 'FREE';
-  document.getElementById('statPlanSub').textContent = isPrem ? 'Premium Member ✦' : 'Upgrade to Premium';
-  document.getElementById('profilePlan').textContent = isPrem ? '✦ Premium Member' : '⬡ Free Member';
-  document.getElementById('profilePlan').className = 'profile-plan ' + (isPrem ? 'premium' : 'free');
-
-  // Downloads page
-  renderDownloads();
-}
-
-// ─── RENDER DOWNLOADS ─────────────────────────────────────────────────────────
-function renderDownloads() {
-  const container = document.getElementById('downloadContent');
-  const count = document.getElementById('dlCount');
-  count.textContent = `${state.downloads.length} file${state.downloads.length !== 1 ? 's' : ''}`;
-
-  if (state.downloads.length === 0) {
-    container.innerHTML = `
-      <div class="downloads-empty">
-        <div class="empty-icon">📥</div>
-        <h3>No Downloads Yet</h3>
-        <p>Browse videos and click Download to save them here.</p>
-      </div>`;
-    return;
-  }
-
-  container.innerHTML = `<div class="download-list">${state.downloads.map(d => `
-    <div class="dl-item">
-      <div class="dl-thumb ${d.thumb}">${d.emoji}</div>
-      <div class="dl-info">
-        <div class="dl-title">${d.title}</div>
-        <div class="dl-meta">${d.size} · ${d.downloadedAt}</div>
-      </div>
-      <div class="dl-status">Downloaded</div>
-    </div>`).join('')}
-  </div>`;
-}
-
-// ─── PAGE NAVIGATION ──────────────────────────────────────────────────────────
-function showPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + name).classList.add('active');
-  if (name === 'downloads') renderDownloads();
-}
-
-// ─── PREMIUM MODAL ────────────────────────────────────────────────────────────
-function openPremiumModal() {
-  document.getElementById('premiumModal').classList.add('open');
-}
-
-function closePremiumModal() {
-  document.getElementById('premiumModal').classList.remove('open');
-}
-
-function selectPlan(plan) {
-  state.selectedPlan = plan;
-  document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
-  document.getElementById('plan-' + plan).classList.add('selected');
-}
-
-// ─── RAZORPAY PAYMENT ─────────────────────────────────────────────────────────
-function initiatePayment() {
-  const plan = state.plans[state.selectedPlan];
-  const btn = document.getElementById('payBtn');
-  btn.textContent = 'Opening payment...';
-  btn.disabled = true;
-
-  const options = {
-    key: 'rzp_test_1234567890abcd',  // Replace with your Razorpay Test Key
-    amount: plan.price * 100,         // in paise
-    currency: 'INR',
-    name: 'LUMIVID',
-    description: `Premium ${state.selectedPlan === 'monthly' ? 'Monthly' : 'Annual'} Subscription`,
-    image: '',
-    handler: function(response) {
-      // Payment success
-      onPaymentSuccess(response);
-    },
-    prefill: {
-      name: 'Alex Rivera',
-      email: 'alex@example.com',
-      contact: '9876543210'
-    },
-    notes: {
-      plan: state.selectedPlan,
-      address: 'India'
-    },
-    theme: { color: '#e8ff47' },
-    modal: {
-      ondismiss: function() {
-        btn.textContent = 'Pay & Unlock Premium';
-        btn.disabled = false;
-        showToast('info', 'ℹ️', 'Payment cancelled. You can try again anytime.');
-      }
-    }
-  };
-
-  try {
-    const rzp = new Razorpay(options);
-    rzp.on('payment.failed', function(response) {
-      showToast('error', '❌', 'Payment failed: ' + (response.error.description || 'Try again.'));
-      btn.textContent = 'Pay & Unlock Premium';
-      btn.disabled = false;
-    });
-    rzp.open();
-  } catch (e) {
-    // Fallback for demo (Razorpay not loaded or key invalid)
-    simulatePayment(plan, btn);
-  }
-}
-
-function simulatePayment(plan, btn) {
-  // Demo simulation when Razorpay key is test/invalid
-  btn.textContent = '⏳ Processing test payment...';
-  setTimeout(() => {
-    onPaymentSuccess({ razorpay_payment_id: 'pay_DEMO_' + Date.now() });
-    btn.textContent = 'Pay & Unlock Premium';
-    btn.disabled = false;
-  }, 2000);
-}
-
-function onPaymentSuccess(response) {
-  state.isPremium = true;
-  closePremiumModal();
-  updateUI();
-  showToast('success', '🎉', `Welcome to Premium! Payment ID: ${response.razorpay_payment_id ? response.razorpay_payment_id.slice(-8) : 'SUCCESS'}`);
-
-  const btn = document.getElementById('payBtn');
-  btn.textContent = 'Pay & Unlock Premium';
-  btn.disabled = false;
-
-  // Update banner style
-  document.getElementById('planBanner').style.borderColor = 'rgba(245,158,11,0.3)';
-  document.getElementById('planBanner').style.background = 'linear-gradient(135deg, rgba(245,158,11,0.05), rgba(239,68,68,0.05))';
-}
-
-// ─── TOAST ────────────────────────────────────────────────────────────────────
-function showToast(type, icon, message) {
-  const container = document.getElementById('toastContainer');
-  const toast = document.createElement('div');
-  toast.className = `toast ${type}`;
-  toast.innerHTML = `<span class="toast-icon">${icon}</span><span>${message}</span>`;
-  container.appendChild(toast);
-  setTimeout(() => {
-    toast.style.opacity = '0';
-    toast.style.transform = 'translateX(30px)';
-    toast.style.transition = 'all 0.3s';
-    setTimeout(() => toast.remove(), 300);
-  }, 4000);
-}
-
-// ─── CLOSE MODAL ON OUTSIDE CLICK ─────────────────────────────────────────────
-document.getElementById('premiumModal').addEventListener('click', function(e) {
-  if (e.target === this) closePremiumModal();
-});
-
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-renderVideos();
-updateUI();
-</script>
-</body>
-</html>
+      <div class="profile-stat-label">Current Plan</div>
+      <div class="profile-stat-val
